@@ -57,7 +57,7 @@ const Home = () => {
         <div className="w-full h-full flex justify-between items-center">
           <p className="text-2xl font-bold">Notes</p>
           <button
-            className="px-4 py-2 bg-blue-500 text-white font-medium rounded-2xl cursor-pointer"
+            className="px-4 py-2 bg-blue-500 text-white font-medium rounded-xl cursor-pointer"
             onClick={() => {
               navigate("/create");
             }}
@@ -68,7 +68,7 @@ const Home = () => {
       </div>
       <div className="w-full h-full px-40 py-4 grid grid-cols-4 gap-4">
         {notes.map((note) => (
-          <Note note={note} />
+          <Note note={note} fetchNotes={fetchNotes} />
         ))}
         {isLoading && (
           <div className="w-full h-full flex justify-center items-center">

@@ -25,7 +25,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full h-24 px-40 py-8 font-medium border-b border-gray-300 flex justify-between">
+    <div className="w-full h-24 px-2 lg:px-40 py-8 font-medium border-b border-gray-300 flex justify-between">
       <h1 className="text-3xl">Welcome to Notes App</h1>
       <div>
         {user?.user_metadata?.email ? (
