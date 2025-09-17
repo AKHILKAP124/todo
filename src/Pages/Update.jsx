@@ -12,17 +12,6 @@ const Update = () => {
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [noteUserId, setNoteUserId] = useState("");
-    const [NoteData, setNoteData] = useState({
-        userId: "",
-        title: "",
-        content: "",
-    })
-
-    const handleOnChange = (e) => {
-        setNoteData({...NoteData, [e.target.name]: e.target.value});
-    }
-
 
     useEffect( () => {
         
@@ -38,7 +27,6 @@ const Update = () => {
             if (data) {
                 setTitle(data?.title);
                 setContent(data?.content);
-                setNoteUserId(data?.userId);
 
                 console.log(data);
             }
@@ -52,9 +40,7 @@ const Update = () => {
     const handleOnSubmit = async (e) => {
         e.preventDefault();
 
-        NoteData.userId = noteUserId
-
-        const response = await supabase.from('notes').update(NoteData).eq('id', id);
+        const response = await supabase.from('notes').update({title, content}).eq('id', id);
         if (response.error) {
             console.log(response.error.message);
             toast.error(response.error.message);
@@ -73,8 +59,8 @@ const Update = () => {
               <p className='text-xl '>Update Note</p>
               
               <form onSubmit={handleOnSubmit} className=" flex flex-col py-6 ">
-                  <input className='w-80 h-10 border border-gray-300 rounded-lg px-4 my-2' value={title} type="text" placeholder='Title' name='title' onChange={handleOnChange}/>
-                  <textarea className='w-80 h-10 border border-gray-300 rounded-lg px-4 my-2' value={content} type="text" placeholder='Content' name='content' onChange={handleOnChange} />
+                  <input className='w-80 h-10 border border-gray-300 rounded-lg px-4 my-2' value={title} type="text" placeholder='Title' name='title' onChange={(e)=>{setTitle(e.target.value)}}/>
+                  <textarea className='w-80 h-10 border border-gray-300 rounded-lg px-4 my-2' value={content} type="text" placeholder='Content' name='content' onChange={(e) => { setContent(e.target.value) }} />
                   <button type='submit' className='w-80 px-4 py-2 bg-blue-500 text-white font-medium rounded-lg cursor-pointer mt-6'>Update</button>
 
               </form>
