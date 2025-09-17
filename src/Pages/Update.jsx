@@ -17,7 +17,7 @@ const Update = () => {
         
         const fetchNote = async () => {
             
-            const [data, error] = await supabase.from('notes').select("*").eq('id', id).single();
+            const {data, error} = await supabase.from('notes').select("*").eq('id', id).single();
     
             if (error) {
                 console.log(error);
@@ -25,10 +25,10 @@ const Update = () => {
             }
     
             if (data) {
+                console.log(data);
                 setTitle(data?.title);
                 setContent(data?.content);
 
-                console.log(data);
             }
         }
 
